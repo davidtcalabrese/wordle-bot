@@ -1,5 +1,8 @@
 const { loadWordsFromFile } = require("./utils");
 
+const allWords = loadWordsFromFile();
+
+
 const filterWords = (
     guessedWord,
     letterStatuses,
@@ -44,7 +47,6 @@ const filterWords = (
 
     return true;
   };
-  const allWords = loadWordsFromFile();
   return allWords.filter(isWordPossibleSolution);
 };
 
@@ -60,9 +62,8 @@ const getLetterFrequencies = (possibleWords) => {
 };
 
 const calculateWordScores = (letterFrequencies) => {
-  const wordsToScore = loadWordsFromFile();
   const wordScores = {};
-  for (const word of wordsToScore) {
+  for (const word of allWords) {
     const uniqueLetters = new Set(word.split(''));
     let score = 0;
     for (const letter of uniqueLetters) {
@@ -87,13 +88,18 @@ const findBestGuess = (possibleWords) => {
     }
   }
 
+
   return Object.keys(wordScores).sort((a, b) => {
     return wordScores[b] - wordScores[a];
   });
 };
 
 const getSuggestions = (guessedWord, letterStatuses, absentLetters) => {
+  console.log(`Getting suggestions for guessed word ${guessedWord}`);
+  console.log(`Letter statuses are: ${letterStatuses}.`);
+  console.log(`Absent Letters are: ${absentLetters}.`);
   const remainingWords = filterWords(guessedWord, letterStatuses, absentLetters);
+  console.log(`There are ${remainingWords.length} words remaining after guessing ${guessedWord}.`);
   return findBestGuess(remainingWords);
 }
 
