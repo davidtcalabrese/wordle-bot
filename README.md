@@ -15,5 +15,10 @@ Run `npm run dev` in frontend and backend directories to start the express serve
 
 ## Todo
 * Currently this bot will only suggest answers that could actually be solutions based on given information. This is not always the most efficient way to get the solution. For example, the NYT's WorldeBot will often guess a word that could _not_ be the solution but is effective in eliminating the maximum number of options.
-* The list of words are in words.txt are words that are likely answers. There are additional words that Wordle will allow as guesses though they will never be the solution (e.g., obscure and onsolete words). See allowed list here: https://gist.github.com/cfreshman/cdcdf777450c5b5301e439061d29694c
-* To allow for ultimate efficiency the algorithm should be adjusted to allow for guesses that would not be the solution but would narrow down options effectively. To do this the larger list of allowed words would need to be implemented somehow. 
+* `possible-answers.txt` is a list of 2309 words that are valid Wordle solutions. `allowed-guesses.txt` is a list of 10657 words that are valid _guesses_. These are words that Wordle will allow as guesses but they will never be the solution (typically they are obscure and obsolete words).
+* To allow for ultimate efficiency the algorithm should be adjusted to allow for guesses from this latter list that would not be the solution but would narrow down options effectively. To do this the larger list of allowed words would need to be implemented somehow. It is not currently being used
+
+I got the word lists from here: 
+
+allowed-guesses:  https://gist.github.com/cfreshman/cdcdf777450c5b5301e439061d29694c
+possible-answers: https://gist.github.com/cfreshman/a03ef2cba789d8cf00c08f767e0fad7b
